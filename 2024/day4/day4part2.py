@@ -30,28 +30,12 @@ def parse_matrix_file(file):
     return matrix
 
 
-def print_matrix(matrix):
-    for line in matrix:
-        print(str(line))
-
-
 def inline_row(matrix):
     result = []
     for line in matrix:
-        print_line = ""
-        for char in line:
-            print_line += char
+        print_line = "".join(line)
         result.append(print_line)
     return result
-
-
-def rotate_90(matrix):
-    rotated_matrix = []
-    for j in range(0, len(matrix[0])):
-        rotated_matrix.append([])
-        for i in reversed(range(0, len(matrix))):
-            rotated_matrix[j] += matrix[i][j]
-    return rotated_matrix
 
 
 def rotate_45(matrix):

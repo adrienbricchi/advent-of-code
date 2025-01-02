@@ -18,12 +18,9 @@
 
 import time
 
+from utils import print_matrix
+
 map = []
-
-
-def print_map():
-    for i in range(0, len(map)):
-        print("".join(map[i]))
 
 
 def find_player_position():
@@ -50,7 +47,7 @@ def is_in_map_boundaries(position):
 def run():
     while True:
         print("")
-        print_map()
+        print_matrix(map)
         current_position = find_player_position()
         ahead_position = get_forward_position()
         if not is_in_map_boundaries(ahead_position):
@@ -68,7 +65,7 @@ def run():
         # time.sleep(0.5)
 
     print("")
-    print_map()
+    print_matrix(map)
 
 
 def count_x():

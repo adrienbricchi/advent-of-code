@@ -21,11 +21,6 @@ from tqdm import tqdm
 import multiprocessing
 
 
-def print_map(given_map):
-    for i in range(0, len(given_map)):
-        print("".join(given_map[i]))
-
-
 def find_player_position(given_map):
     for i in range(0, len(given_map[0])):
         for j in range(0, len(given_map)):

@@ -74,8 +74,6 @@ def binary_sum(values, evaluations):
                 else:
                     values[todo] = values[left] != values[right]
 
-                # print("evaluate " + todo + ": " + left + "(" + str(int(values[left])) + ") " + operation + " " + right + "(" + str(int(values[right])) + ") = " + str(int(values[todo])))
-
                 evaluation_done = True
                 del evaluations[todo]
 

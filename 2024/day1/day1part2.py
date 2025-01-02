@@ -19,10 +19,10 @@
 import csv
 
 with (open('input.csv', newline='') as csvfile):
-    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    spam_reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
     left_row = []
     right_row = []
-    for row in spamreader:
+    for row in spam_reader:
         filtered_row = [i for i in row if i != '']
         left_row.append(filtered_row[0])
         right_row.append(filtered_row[1])
