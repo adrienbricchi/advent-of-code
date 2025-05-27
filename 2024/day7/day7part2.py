@@ -36,21 +36,21 @@ def compute(table):
     for entry in table:
         key = entry[0]
         values = entry[1]
-        print(">> " + str(key) + ": " + str(values))
         possible_results = [values[0]]
         for i in range(1, len(values)):
             value = values[i]
             temp_possible_results = []
-            print("    " + str(possible_results) + " +* " + str(value))
+            # print("    " + str(possible_results) + " +*|| " + str(value))
             for possible_result in possible_results:
                 temp_possible_results.append(possible_result + value)
                 temp_possible_results.append(possible_result * value)
+                temp_possible_results.append(int(str(possible_result) + str(value)))
             possible_results = temp_possible_results
         if key in possible_results:
-            print("    found " + str(key) + " in " + str(possible_results))
+            print(">> " + str(key) + ": " + str(values) + " found!")
             match_sum += key
         else:
-            print("    no match for " + str(key) + " in " + str(possible_results))
+            print(">> " + str(key) + ": " + str(values))
     return match_sum
 
 
