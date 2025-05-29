@@ -17,6 +17,23 @@
 #
 
 
+def parse_matrix(file):
+    """
+    Parse the given file into a char[][] matrix
+    :param file
+    :return:
+    """
+    matrix = []
+    with (open(file, newline='') as file):
+        for line in file.readlines():
+            line_parsed = []
+            for char in line:
+                if char != "\n":
+                    line_parsed.append(char)
+            matrix.append(line_parsed)
+    return matrix
+
+
 def rotate_90(matrix):
     """
     Rotates a matrix, 90 degrees clockwise

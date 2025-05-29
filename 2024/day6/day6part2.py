@@ -19,6 +19,7 @@
 import copy
 from tqdm import tqdm
 import multiprocessing
+from utils import parse_matrix
 
 
 def find_player_position(given_map):
@@ -108,15 +109,7 @@ def check_loop(init_map, obstacle, result, result_lock):
 
 
 if __name__ == '__main__':
-    initial_map = []
-    with (open('input.txt', newline='') as file):
-
-        for line in file.readlines():
-            line_parsed = []
-            for char in line:
-                if char != "\n":
-                    line_parsed.append(char)
-            initial_map.append(line_parsed)
+    initial_map = parse_matrix('input.txt')
 
     game_map = copy.deepcopy(initial_map)
     has_ended = run(game_map)

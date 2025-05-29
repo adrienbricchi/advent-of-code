@@ -16,9 +16,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-import time
+from utils import print_matrix, parse_matrix
 
-from utils import print_matrix
 
 map = []
 
@@ -77,14 +76,7 @@ def count_x():
     return sum
 
 
-with (open('input.txt', newline='') as file):
-    for line in file.readlines():
-        line_parsed = []
-        for char in line:
-            if char != "\n":
-                line_parsed.append(char)
-        map.append(line_parsed)
-
-    run()
-    print("")
-    print(">> x:" + str(count_x()))
+map = parse_matrix('input.txt')
+run()
+print("")
+print(">> x:" + str(count_x()))
