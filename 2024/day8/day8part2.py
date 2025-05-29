@@ -42,13 +42,18 @@ def find_char_coordinates(map, char):
 def write_antinode(map, coord):
     i = coord[0]
     j = coord[1]
-    if i < len(map):
-        if j < len(map[i]):
-            if map[i][j] == ".":
-                map[i][j] = "#"
+    if is_in_map_range(map, coord):
+        if map[i][j] == ".":
+            map[i][j] = "#"
 
 
-def find_antinodes(antenna_coords):
+def is_in_map_range(map, coord):
+    i = coord[0]
+    j = coord[1]
+    return 0 <= i < len(map) and 0 <= j < len(map[i])
+
+
+def find_antinodes(map, antenna_coords):
     results = []
     for i in range(0, len(antenna_coords)):
         current_antenna = antenna_coords[i]
@@ -57,11 +62,13 @@ def find_antinodes(antenna_coords):
             diff_i = next_antenna[0] - current_antenna[0]
             diff_j = next_antenna[1] - current_antenna[1]
             back_antinode = (current_antenna[0] - diff_i, current_antenna[1] - diff_j)
-            forward_antinode = (next_antenna[0] + diff_i, next_antenna[1] + diff_j)
-            if back_antinode not in results:
+            while is_in_map_range(map, back_antinode):
                 results.append(back_antinode)
-            if forward_antinode not in results:
+                back_antinode = (back_antinode[0] - diff_i, back_antinode[1] - diff_j)
+            forward_antinode = (next_antenna[0] + diff_i, next_antenna[1] + diff_j)
+            while is_in_map_range(map, forward_antinode):
                 results.append(forward_antinode)
+                forward_antinode = (forward_antinode[0] + diff_i, forward_antinode[1] + diff_j)
     return results
 
 
@@ -73,20 +80,22 @@ antinodes = []
 for antenna in antennas:
     antenna_coords = find_char_coordinates(map, antenna)
     print(antenna + ": " + str(antenna_coords))
-    pending_antinodes = find_antinodes(antenna_coords)
+    pending_antinodes = find_antinodes(map, antenna_coords)
     print("   #: " + str(pending_antinodes))
-    for pending_antinode in pending_antinodes:
-        if pending_antinode not in antinodes:
-            if 0 <= pending_antinode[0] < len(map):
-                if 0 <= pending_antinode[1] < len(map[0]):
-                    antinodes.append(pending_antinode)
     # temp_map = parse_matrix('input.txt')
-    # for antinode in antinodes:
+    # for antinode in pending_antinodes:
     #     write_antinode(temp_map, antinode)
     # print_matrix(temp_map)
+    for pending_antinode in pending_antinodes:
+        antinodes.append(pending_antinode)
 
 for antinode in antinodes:
     write_antinode(map, antinode)
 print_matrix(map)
 
-print("#: " + str(len(antinodes)))
+total = 0
+for line in map:
+    for dot in line:
+        total += 1 if dot != "." else 0
+
+print("#: " + str(total))
